@@ -5,21 +5,6 @@ using System.Text.Json;
 
 Console.WriteLine("==== Adicionar Configurações ao Arquivo tnsnames ====");
 
-// Caminho do arquivo .ora
-Console.Write("Digite o caminho do arquivo .ora (ou pressione Enter para usar o padrão): ");
-string caminhoArquivo = Console.ReadLine() ?? "";
-if (string.IsNullOrWhiteSpace(caminhoArquivo))
-{
-    caminhoArquivo = "C:\\oracle\\product\\11.2.0\\client_1\\network\\admin\\tnsnames.ora";
-}
-
-// Verifica se o arquivo existe
-if (!File.Exists(caminhoArquivo))
-{
-    Console.WriteLine("Erro: O arquivo não foi encontrado!");
-    return;
-}
-
 // Caminho do JSON (na mesma pasta do executável)
 string caminhoJson = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "configuration.json");
 
@@ -36,6 +21,20 @@ var dados = JsonSerializer.Deserialize<Configuracao>(jsonContent);
 if (dados == null || dados.Bancos == null || dados.Bancos.Count == 0)
 {
     Console.WriteLine("Erro: Nenhum banco foi encontrado no JSON!");
+    return;
+}
+
+// Caminho do arquivo .ora
+string caminhoArquivo = dados.CaminhoArquivo;
+// if (string.IsNullOrWhiteSpace(caminhoArquivo))
+// {
+//     caminhoArquivo = "C:\\oracle\\product\\11.2.0\\client_1\\network\\admin\\tnsnames.ora";
+// }
+
+// Verifica se o arquivo existe
+if (!File.Exists(caminhoArquivo))
+{
+    Console.WriteLine("Erro: O arquivo não foi encontrado!");
     return;
 }
 
@@ -79,5 +78,6 @@ Console.ReadLine();
 
 class Configuracao
 {
+    public string CaminhoArquivo { get; set; } = string.Empty;
     public List<string> Bancos { get; set; } = new List<string>();
 }
