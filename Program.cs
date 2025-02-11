@@ -11,10 +11,12 @@ string caminhoJson = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config
 if (!File.Exists(caminhoJson))
 {
     Console.WriteLine($"Erro: O arquivo JSON '{caminhoJson}' não foi encontrado!");
+    Console.WriteLine("Pressione Enter para sair...");
+    Console.ReadLine();
     return;
 }
 
-// Lê e desserializa o JSON
+// Lê e desconstrói o JSON
 string jsonContent = File.ReadAllText(caminhoJson);
 var dados = JsonSerializer.Deserialize<Configuracao>(jsonContent);
 
@@ -24,7 +26,7 @@ if (dados == null || dados.Bancos == null || dados.Bancos.Count == 0)
     return;
 }
 
-// Caminho do arquivo .ora
+// pega o caminho do arquivo .ora no JSON
 string caminhoArquivo = dados.CaminhoArquivo;
 // if (string.IsNullOrWhiteSpace(caminhoArquivo))
 // {
@@ -35,6 +37,8 @@ string caminhoArquivo = dados.CaminhoArquivo;
 if (!File.Exists(caminhoArquivo))
 {
     Console.WriteLine("Erro: O arquivo não foi encontrado!");
+    Console.WriteLine("Pressione Enter para sair...");
+    Console.ReadLine();
     return;
 }
 
@@ -72,7 +76,7 @@ if (adicionouAlgo)
 else
     Console.WriteLine("Nenhuma alteração foi feita, todos os blocos já existiam.");
 
-// Adicionando uma pausa para evitar que a janela feche rapidamente
+//Evitar que a janela feche rapidamente
 Console.WriteLine("Pressione Enter para sair...");
 Console.ReadLine();
 
