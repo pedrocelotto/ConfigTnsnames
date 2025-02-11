@@ -1,0 +1,36 @@
+configuration.json
+
+# Pastas de build
+bin/
+obj/
+
+# Pasta de saída do Publish (se aplicável)
+publish/
+
+# Configurações específicas do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configurações do VS Code
+.vscode/
+
+# Diretórios e arquivos temporários
+_ReSharper*/
+*.ncrunch*
+*.cache
+*.log
+
+# Diretórios de pacotes do NuGet (geralmente não é necessário)
+.nuget/
+packages/
+
+# Test results
+TestResults/
+
+# Outras pastas específicas de ferramentas
+.idea/
+*.sln.iml
+
